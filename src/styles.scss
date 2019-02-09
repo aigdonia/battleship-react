@@ -1,0 +1,42 @@
+$border-color: #ccc;
+$occupied-color: blue;
+$hit-color: red;
+$miss-color: grey;
+
+.battlefield {
+    display: flex;
+    flex-wrap: wrap;
+    width: 300px;
+    border: 2px solid $border-color;
+
+    // &--interactive {
+        // transform: scale(0.5)
+    // }
+    .battlefield__{
+        &cell {
+            box-sizing: border-box;
+            background-color: white;
+            border-top: 1px solid $border-color;
+            border-left: 1px solid $border-color;
+            width: 30px;
+            height: 30px;
+            &:nth-child(10n+0){
+                border-right: 1px solid $border-color;
+            }
+
+            &:nth-child(n+91){
+                border-bottom: 1px solid $border-color;
+            }
+
+            &--occupied {
+                background-color: $occupied-color;
+            }
+            &--hit {
+                background-color: $hit-color; 
+            }
+            &--miss {
+                background-color: $miss-color;
+            }
+        }
+    }
+}
