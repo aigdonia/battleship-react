@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
 import { ROWS, COLS } from './helpers/constants';
-import Battlefield from './components/Battlefield'
 import { initBattleGrid } from './helpers/battlefield';
 import './styles.scss';
+import BattleScreen from './components/BattleScreen';
 
 class BattleshipApp extends Component {
     playerGrid = null;
@@ -13,18 +15,17 @@ class BattleshipApp extends Component {
         this.playerGrid[0][5] = 0;
         this.playerGrid[1][5] = 0;
         this.playerGrid[2][5] = 1;
-
         this.playerGrid[4][6] = 2;
         this.oppentGrid = initBattleGrid(ROWS, COLS);
     }
 
     render() {
         return(
-            <div>
-                <Battlefield rows={ROWS} cols={COLS} grid={this.playerGrid} />
-                <hr/>
-                <Battlefield rows={ROWS} cols={COLS} grid={this.oppentGrid} />
-            </div>
+            <BrowserRouter>
+                <Switch>
+                    <Route exact path='/' component={BattleScreen}></Route>
+                </Switch>
+            </BrowserRouter>
         );
     }
 }

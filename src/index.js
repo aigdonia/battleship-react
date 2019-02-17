@@ -1,8 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './styles.scss';
-import BattleshipApp from './BattleshipApp';
-import * as serviceWorker from './serviceWorker';
+import {render} from 'react-dom';
 
-ReactDOM.render(<BattleshipApp />, document.getElementById('root'));
-serviceWorker.unregister();
+import BattleshipApp from './BattleshipApp';
+import './styles.scss';
+
+render(
+  <BattleshipApp />
+  , document.getElementById('root'));
+  

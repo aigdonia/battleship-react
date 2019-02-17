@@ -3,40 +3,127 @@ $occupied-color: blue;
 $hit-color: red;
 $miss-color: grey;
 
-.battlefield {
+$cell-size-small: 10px;
+$cell-size-medium: 15px;
+$cell-size-large: 30px;
+
+body {
+  font-family: 'Fira Mono';
+}
+
+#battle-screen {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-end;
+
+  &>div {
+    text-align: center;
     display: flex;
-    flex-wrap: wrap;
-    width: 300px;
-    border: 2px solid $border-color;
+    flex-direction: column;
+    justify-content: space-between;
+    opacity: 1;
+    transition: 0.2s opacity linear;
 
-    // &--interactive {
-        // transform: scale(0.5)
-    // }
-    .battlefield__{
-        &cell {
-            box-sizing: border-box;
-            background-color: white;
-            border-top: 1px solid $border-color;
-            border-left: 1px solid $border-color;
-            width: 30px;
-            height: 30px;
-            &:nth-child(10n+0){
-                border-right: 1px solid $border-color;
-            }
-
-            &:nth-child(n+91){
-                border-bottom: 1px solid $border-color;
-            }
-
-            &--occupied {
-                background-color: $occupied-color;
-            }
-            &--hit {
-                background-color: $hit-color; 
-            }
-            &--miss {
-                background-color: $miss-color;
-            }
-        }
+    &.disabled {
+      pointer-events: none;
+      opacity: 0.3;
     }
+  }
+}
+
+.mini {
+  transform: scale(0.8);
+}
+
+.battlefield {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: $cell-size-medium * 10;
+  width: $cell-size-medium * 10;
+  border: 2px solid $border-color;
+  
+  // modifiers
+  
+  &.battlefield {
+    &--interactive {
+      width: $cell-size-large * 10;
+      height: $cell-size-large * 10;
+      .battlefield__{
+        &cell {
+          width: 30px;
+          height: 30px;
+          cursor: pointer;
+          transition: 50ms ease-in-out transform;
+          
+          &--occupied {
+            background-color: transparent;
+          }
+          
+          &:hover {
+            background-color: #eee;
+            transform: scale(1.1);
+            border: 1px solid $border-color;
+          }
+        }
+      }
+      
+    }
+  }
+  
+  // elements
+  .battlefield__{
+    &cell {
+      box-sizing: border-box;
+      background-color: white;
+      border-top: 1px solid $border-color;
+      border-left: 1px solid $border-color;
+      width: $cell-size-medium;
+      height: $cell-size-medium;
+      
+      &:nth-child(10n+0){
+        border-bottom: 1px solid $border-color;
+      }
+      
+      &:nth-child(n+91){
+        border-right: 1px solid $border-color;
+      }
+      
+      &--occupied {
+        background-color: $occupied-color;
+      }
+      
+      &--hit {
+        background-color: $hit-color; 
+      }
+      &--miss {
+        background-color: $miss-color;
+      }
+    }
+  }
+}
+
+.ships {
+  margin: 10px 0 35px;
+  .ship{
+    display: flex;
+    justify-content: space-between;
+    &__title{
+      font-size: 12px;
+    }
+
+    &__body{
+      display: flex;
+      &>span{
+        display: block;
+        width: 12px;
+        height: 12px;
+        background-color: green;
+        border: 1px solid white;
+        &.hit {
+          background-color: red;
+        }
+      }
+    }
+  }
 }
